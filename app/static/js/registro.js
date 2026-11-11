@@ -49,3 +49,15 @@ formulario.addEventListener("submit", (evento) => {
         evento.preventDefault();
     }
 });
+
+// Avisa mientras se escribe: compara las dos contraseñas a cada tecla
+function comprobarClaves() {
+    limpiarErrores(); // en cuanto vuelve a escribir, fuera los avisos del último envío
+    const escrita = campoRepetida.value !== "";
+    const distintas = campoRepetida.value !== campoClave.value;
+    campoRepetida.classList.toggle("error", escrita && distintas);
+    campoRepetida.classList.toggle("correcto", escrita && !distintas);
+    }
+    
+campoRepetida.addEventListener("input", comprobarClaves);
+campoClave.addEventListener("input", comprobarClaves);
