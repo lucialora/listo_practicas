@@ -62,3 +62,12 @@ function comprobarClaves() {
     
 campoRepetida.addEventListener("input", comprobarClaves);
 campoClave.addEventListener("input", comprobarClaves);
+
+// Un clic enseña la contraseña; otro la vuelve a ocultar
+document.getElementById("ver-clave").addEventListener("click", () => {
+    if (campoClave.type === "password") {
+        campoClave.type = "text";
+    } else {
+        campoClave.type = "password";
+    }
+});

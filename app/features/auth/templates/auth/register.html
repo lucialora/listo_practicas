@@ -18,6 +18,8 @@
             <input class="form-control" id="dni" name="dni" type="text" maxlength="9">
           </div>
           {{ render_field(form.password) }}
+          <button id="ver-clave" type="button" class="btn btn-outline-secondary btn-sm mb-3">Ver la
+                  contraseña</button>
           {{ render_field(form.confirm) }}
           {{ form.submit(class="btn btn-primary w-100") }}
         </form>
