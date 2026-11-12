@@ -14,3 +14,35 @@ function actualizarContador() {
 // Al cargar la página (al editar, el título ya trae texto) y a cada tecla
 actualizarContador();
 campoTitulo.addEventListener("input", actualizarContador);
+
+// Borra las marcas y los mensajes del intento anterior
+function limpiarErrores() {
+    for (const campo of formulario.querySelectorAll(".is-invalid")) {
+        campo.classList.remove("is-invalid");
+    }
+    for (const aviso of formulario.querySelectorAll(".invalid-feedback")) {
+        aviso.remove();
+    }
+}
+
+// Marca un campo en rojo y escribe el mensaje debajo de él
+function mostrarError(campo, mensaje) {
+    campo.classList.add("is-invalid");
+    const aviso = document.createElement("div");
+    aviso.classList.add("invalid-feedback");
+    aviso.textContent = mensaje;
+    campo.parentElement.appendChild(aviso);
+}
+
+formulario.addEventListener("submit", (evento) => {
+    limpiarErrores();
+    const titulo = campoTitulo.value.trim();
+
+    if (titulo === "") {
+        mostrarError(campoTitulo, "Escribe un título: solo con espacios no vale.");
+        evento.preventDefault();
+    } else if (titulo.length > maximo) {
+        mostrarError(campoTitulo, `El título no puede pasar de ${maximo} caracteres.`);
+        evento.preventDefault();
+    }
+});
