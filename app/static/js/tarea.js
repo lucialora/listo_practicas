@@ -17,27 +17,8 @@ function actualizarContador() {
 actualizarContador();
 campoTitulo.addEventListener("input", actualizarContador);
 
-// Borra las marcas y los mensajes del intento anterior
-function limpiarErrores() {
-    for (const campo of formulario.querySelectorAll(".is-invalid")) {
-        campo.classList.remove("is-invalid");
-    }
-    for (const aviso of formulario.querySelectorAll(".invalid-feedback")) {
-        aviso.remove();
-    }
-}
-
-// Marca un campo en rojo y escribe el mensaje debajo de él
-function mostrarError(campo, mensaje) {
-    campo.classList.add("is-invalid");
-    const aviso = document.createElement("div");
-    aviso.classList.add("invalid-feedback");
-    aviso.textContent = mensaje;
-    campo.parentElement.appendChild(aviso);
-}
-
 formulario.addEventListener("submit", (evento) => {
-    limpiarErrores();
+    limpiarErrores(formulario);
     const titulo = campoTitulo.value.trim();
 
     if (titulo === "") {

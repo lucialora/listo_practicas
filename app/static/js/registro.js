@@ -8,25 +8,6 @@ const campoDni = document.getElementById("dni");
 const campoClave = document.getElementById("password");
 const campoRepetida = document.getElementById("confirm");
 
-// Borra las marcas y los mensajes del intento anterior
-function limpiarErrores() {
-    for (const campo of formulario.querySelectorAll(".is-invalid")) {
-        campo.classList.remove("is-invalid");
-    }
-    for (const aviso of formulario.querySelectorAll(".invalid-feedback")) {
-        aviso.remove();
-    }
-}
-
-// Marca un campo en rojo y escribe el mensaje debajo de él
-function mostrarError(campo, mensaje) {
-    campo.classList.add("is-invalid");
-    const aviso = document.createElement("div");
-    aviso.classList.add("invalid-feedback");
-    aviso.textContent = mensaje;
-    campo.parentElement.appendChild(aviso);
-}
-
 // Ocho dígitos y una letra mayúscula
 function formatoDni(dni) {
     return /^[0-9]{8}[A-Z]$/.test(dni);
@@ -39,7 +20,7 @@ function letraDni(numero) {
 }
 
 formulario.addEventListener("submit", (evento) => {
-    limpiarErrores();
+    limpiarErrores(formulario);
     let hayErrores = false;
     if (campoNombre.value.trim() === "") {
         mostrarError(campoNombre, "El nombre es obligatorio.");
@@ -72,7 +53,7 @@ formulario.addEventListener("submit", (evento) => {
 
 // Avisa mientras se escribe: compara las dos contraseñas a cada tecla
 function comprobarClaves() {
-    limpiarErrores(); // en cuanto vuelve a escribir, fuera los avisos del último envío
+    limpiarErrores(formulario); // en cuanto vuelve a escribir, fuera los avisos del último envío
     const escrita = campoRepetida.value !== "";
     const distintas = campoRepetida.value !== campoClave.value;
     campoRepetida.classList.toggle("error", escrita && distintas);
